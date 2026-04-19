@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "my-terraform-state-bucket"
+    bucket         = "my-terraform-state-bucketaws"
     key            = "global/state.tfstate"
     region         = "us-east-2"
     dynamodb_table = "terraform-lock"
@@ -10,7 +10,6 @@ terraform {
 # -----------------------------------------
 # Create an EC2 instance in us-east-1
 # -----------------------------------------
-
 # -------------------------------
 # Configure AWS Provider
 # -------------------------------
