@@ -1,5 +1,4 @@
 name: Terraform CI/CD (Safe)
-
 on:
   pull_request:
   push:
