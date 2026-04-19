@@ -18,30 +18,21 @@ jobs:
       AWS_DEFAULT_REGION: us-east-2
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Init
-        run: terraform init -input=false
-
-      - name: Terraform Validate
-        run: terraform validate
-
-      - name: Terraform Plan
-        run: terraform plan -input=false
+      - run: terraform init -input=false
+      - run: terraform validate
+      - run: terraform plan -input=false
 
 
   terraform-apply:
     name: Terraform Apply (Manual Approval Required)
     runs-on: ubuntu-latest
 
-    # 🔥 IMPORTANT: only runs when manually triggered
     if: github.event_name == 'workflow_dispatch'
 
-    # 🔐 THIS enables "Approve / Reject" UI in GitHub
     environment:
       name: production
 
@@ -51,14 +42,11 @@ jobs:
       AWS_DEFAULT_REGION: us-east-2
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Init
-        run: terraform init -input=false
+      - run: terraform init -input=false
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
