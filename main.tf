@@ -6,6 +6,7 @@ terraform {
     dynamodb_table = "terraform-lock"
   }
 }
+  
 
 # -----------------------------------------
 # Create an EC2 instance in us-east-1
