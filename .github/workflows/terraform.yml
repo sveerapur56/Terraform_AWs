@@ -24,5 +24,12 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
 
       - run: terraform init
+
       - run: terraform validate
+
       - run: terraform plan
+
+      # Only apply on push to master (NOT on PRs)
+      - name: Terraform Apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: terraform apply -auto-approve
