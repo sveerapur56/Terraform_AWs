@@ -36,8 +36,6 @@ resource "aws_instance" "example1" {
   }
 }
 
-
-
 # -------------------------------
 # Create EC2 Instance 2
 # -------------------------------
