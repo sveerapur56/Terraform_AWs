@@ -4,17 +4,13 @@ on:
   pull_request:
   push:
     branches:
-      - master   # ✅ fixed (matches your repo)
-  workflow_dispatch:   # manual trigger for apply
+      - master
+  workflow_dispatch:
 
 jobs:
   terraform-plan:
     name: Terraform Plan
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./
 
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -37,19 +33,17 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -input=false
 
+
   terraform-apply:
     name: Terraform Apply (Manual Approval Required)
     runs-on: ubuntu-latest
 
-    # Runs only when manually triggered from GitHub Actions
+    # 🔥 IMPORTANT: only runs when manually triggered
     if: github.event_name == 'workflow_dispatch'
 
+    # 🔐 THIS enables "Approve / Reject" UI in GitHub
     environment:
-      name: production   # ✅ enables approval / cancel option
-
-    defaults:
-      run:
-        working-directory: ./
+      name: production
 
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -67,4 +61,4 @@ jobs:
         run: terraform init -input=false
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve
