@@ -1,3 +1,12 @@
+terraform {
+  backend "s3" {
+    bucket         = "my-terraform-state-bucket"
+    key            = "global/state.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "terraform-lock"
+  }
+}
+
 # -----------------------------------------
 # Create an EC2 instance in us-east-1
 # -----------------------------------------
