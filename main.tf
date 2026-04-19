@@ -18,7 +18,6 @@ provider "aws" {
     region     = "us-east-2"            # AWS region where resources will be created
 }
 
-# -------------------------------
 # Create EC2 Instance 1
 # -------------------------------
 resource "aws_instance" "example1" {
