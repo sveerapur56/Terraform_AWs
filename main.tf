@@ -78,3 +78,23 @@ resource "aws_instance" "example3" {
     Env  = "dev"
   }
 }
+
+# -------------------------------
+# Create EC2 Instance 4
+# -------------------------------
+resource "aws_instance" "example4" {
+
+  ami           = "ami-0b2fbde3633b8c69d"   # Same AMI as above
+  instance_type = "t2.large"
+  key_name      = "aws_demo"
+
+  associate_public_ip_address = true        # Enable public access
+
+  # -------------------------------
+  # Tags
+  # -------------------------------
+  tags = {
+    Name = "Instance4"
+    Env  = "dev"
+  }
+}
