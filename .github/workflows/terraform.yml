@@ -4,8 +4,8 @@ on:
   pull_request:
   push:
     branches:
-      - master
-  workflow_dispatch:
+      - master   # ✅ fixed (matches your repo)
+  workflow_dispatch:   # manual trigger for apply
 
 jobs:
   terraform-plan:
@@ -41,11 +41,11 @@ jobs:
     name: Terraform Apply (Manual Approval Required)
     runs-on: ubuntu-latest
 
-    # IMPORTANT: only runs when manually triggered
+    # Runs only when manually triggered from GitHub Actions
     if: github.event_name == 'workflow_dispatch'
 
     environment:
-      name: production
+      name: production   # ✅ enables approval / cancel option
 
     defaults:
       run:
